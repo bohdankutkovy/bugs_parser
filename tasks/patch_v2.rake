@@ -29,6 +29,37 @@ namespace :patch_v2 do
       WHERE parent_id = #{its_project_id} OR parent_id IN (#{product_ids.join(',')})
     ")
 
+    # collectiong sub-product ids
+    project_ids = @pg_connection.exec("
+      SELECT id FROM projects
+      WHERE parent_id IN (#{product_ids.join(',')})
+    ").map{ |p| p['id'] }
+
+    # setting all issues project_id to root its_project_id
+    @pg_connection.exec("
+      UPDATE issues
+      SET project_id = #{its_project_id}
+      WHERE project_id IN (#{project_ids.join(',')})
+    ")
+
+    # delete possible dependencies
+    @pg_connection.exec("
+      DELETE FROM easy_settings
+      WHERE project_id IN (#{(project_ids + product_ids).join(',')})
+    ")
+
+    # delete all sub-products
+    @pg_connection.exec("
+      DELETE FROM projects
+      WHERE id IN (#{project_ids.join(',')})
+    ")
+
+    # delete all products
+    @pg_connection.exec("
+      DELETE FROM projects
+      WHERE id IN (#{(product_ids).join(',')})
+    ")
+
     p 'Finish!'
 
   end
