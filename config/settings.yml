@@ -1,0 +1,25 @@
+bugzilla:
+  host: 'http://localhost/bugzilla'
+  admin:
+    email: 'admin@example.net'
+    login: 'admin'
+    password: 'admin12345'
+  mysql:
+    host: '127.0.0.1'
+    port: 3306
+    database: bugs
+    username: 'bugs'
+    password: ''
+easy_redmine:
+  host: 'http://localhost:3000'
+  uploads_dir: '/home/bohdan/repositories/sigmacom/redmine_app/files'
+  admin:
+    email: 'admin@example.net'
+    login: 'admin'
+    password: 'admin12345' # 'admin'
+  postgres:
+    host: '127.0.0.1'
+    port: 5432
+    db_name: 'redmine'
+    username: bksn_db_user
+    password: BKsn2017!@
