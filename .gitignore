@@ -6,3 +6,6 @@
 
 # Ignonre sql_dump
 redmine_dump.sql
+
+# Config
+/config/settings.yml
