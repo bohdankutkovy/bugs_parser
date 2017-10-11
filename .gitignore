@@ -4,4 +4,5 @@
 # Ignore all logfiles and tempfiles.
 /data
 
-
+# Ignonre sql_dump
+redmine_dump.sql
